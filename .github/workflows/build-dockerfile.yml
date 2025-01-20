@@ -23,6 +23,8 @@ jobs:
         # Build and Push Docker Image
         - name: Build and Push Docker Image
           run: |
-            docker build -t ${{ secrets.DOCKER_USERNAME }}/${{  inputs.APP_NAME }} .
-            docker push ${{ secrets.DOCKER_USERNAME }}/${{  inputs.APP_NAME }}
+            REPO_NAME=${{ inputs.APP_NAME }}
+            REPO_NAME_ONLY=${REPO_NAME##*/}
+            docker build -t ${{ secrets.DOCKER_USERNAME }}/$REPO_NAME_ONLY .
+            docker push ${{ secrets.DOCKER_USERNAME }}/$REPO_NAME_ONLY
   
